@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title></title>
+    <style>
+        .node {
+            /* something general here ? */
+        }
+
+        .highlight {
+            /* something for all highlighted elements */
+        }
+
+        .highlight > .node {
+            color: red;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 1rem;
+            border-left: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        {{{html}}}
+    </ul>
+</body>
+</html>

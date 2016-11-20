@@ -1,0 +1,6 @@
+<li class="{{style}}">
+    <div class="node">{{name}}</div>
+    <ul>
+        {{{html}}}
+    </ul>
+</li>
