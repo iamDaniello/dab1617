@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        body, #grid {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            align-content: center;
+        }
+
+        .cell {
+            width: 30px;
+            height: 30px;
+            border: 1px solid white;
+        }
+
+        .cell.active {
+            background-color: black;
+        }
+
+        .cell.inactive {
+            background-color: lightgrey;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="grid"></div>
+    <a id="start" href="javascript:void(0)">Start</a>
+    <script src="main.js"></script>
+</body>
+</html>
