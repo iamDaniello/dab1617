@@ -1,0 +1,14 @@
+{
+  "name": "dab-02",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "scripts": { 
+      "start" : "node ./main.js" 
+  }
+}

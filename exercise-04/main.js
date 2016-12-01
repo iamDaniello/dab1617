@@ -71,9 +71,13 @@ app.get('/pathTo', function (req, res) {
             html: convertToHtml(root, parseInt(value)).html
         }));
     }
-
-
 });
+
+app.get('/test', function (req, res) {
+
+    res.send('<body><h1>hello world</h1></body>');
+});
+
 
 // an go
 app.listen(3000, function () {
