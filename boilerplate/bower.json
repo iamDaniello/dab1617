@@ -1,0 +1,21 @@
+{
+  "name": "boilerplate",
+  "description": "Boilerplate for the dab 16/17 project.",
+  "main": "index.html",
+  "authors": [
+    "David Linner"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/davidlinner/dab1617",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "page": "^1.7.1"
+  }
+}
