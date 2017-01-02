@@ -31,6 +31,10 @@ node_modules
 # Bower Dependency directory
 bower_components
 
+# Distribution folders
+dist
+build
+
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
