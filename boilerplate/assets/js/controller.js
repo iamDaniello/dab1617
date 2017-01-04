@@ -6,7 +6,7 @@ var controller = (function(_){
     var controllers = {},
         current;
 
-    // return a function that add a controller if provided or returns a delegate to the load function of the named controller
+    // return a function that adds a controller if provided or returns a delegate to the load function of the named controller
     return function(name, controller){
         if(_.isObject(controller) && name){
 

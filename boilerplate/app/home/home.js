@@ -1,12 +1,10 @@
-//each view
 
-// gather all mustache partials / all nested component behaviors
-
-var Home = component({
-
-    events : [],
-
-    template : 'home'
-
-    // event handlers here
-});
+var Home = Component
+    .builder()
+    .render(function(data){
+        return template.merge('home', data);
+    })
+    .on('click', 'a.emergency', function(e){
+        console.log('wow');
+    })
+    .build();

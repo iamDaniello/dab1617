@@ -1,19 +1,14 @@
 /**
  * Simple view helper taking care of rendering and event delegation.
+ *
  */
 
-var component = (function(Mustache, $, _){
+var Component = (function($,_){
 
+    // private functions
     function render() {
-        var rendered;
-
-        if(_.isObject(this.template)){
-            rendered = Mustache.render(this.template.root, this.state, this.template.partials);
-        } else {
-            rendered = Mustache.render(this.template, this.state);
-        }
-
-        if(rendered) {
+        if(_.isFunction(this.render)){
+            var rendered = this.render(this.model);
             $(this.target).html(rendered);
         } else {
             $(this.target).empty();
@@ -21,40 +16,40 @@ var component = (function(Mustache, $, _){
     }
 
     function handle(e){
-        var self = this;
-        _
-            .chain(this.events)
-            .filter(function(event){
-                return event.type === e.type && $(e.target).is(event.selector);
-            })
-            .each(function(event){
-                if(_.isFunction(self[event.handler])){
-                    self[event.handler](e);
+        var mappings = this.events[e.type];
+
+        if(mappings) {
+            for(var i = 0; i < mappings.length; i++){
+                var mapping = mappings[i];
+
+                if($(e.target).is(mapping.selector) && _.isFunction(mapping.handler)){
+                    mapping.handler.call(this, e);
                 }
-            });
+            }
+        }
     }
 
+    // common behavior of components
     var common = {
 
-        attach : function () {
+        attach : function (target) {
+
+            if(this.target) return; // must be a mistake
+
+            this.target = target;
+
             if(this.events && this.target){
                 var $target = $(this.target),
                     eventHandler = _.bind(handle, this);
-                _
-                    .chain(this.events)
-                    .map(function(event){
-                        return event.type;
-                    })
-                    .uniq()
-                    .each(function(type){
-                        $target.on(type, handler);
-                    });
+
+                for(var type in this.events){
+                    $target.on(type, eventHandler);
+                }
 
                 this._eventHandler = eventHandler;
             }
 
             render.apply(this);
-
         },
 
         detach: function () {
@@ -63,38 +58,35 @@ var component = (function(Mustache, $, _){
             if(this.target && this._eventHandler){
                 var $target = $(this.target),
                     eventHandler = this._eventHandler;
-                _
-                    .chain(this.events)
-                    .map(function(event){
-                        return event.type;
-                    })
-                    .uniq()
-                    .each(function(type){
-                        $target.off(type, eventHandler);
-                    });
+
+                for(var type in this.events){
+                    $target.off(type, eventHandler);
+                }
+
+                delete this._eventHandler;
             }
 
-            $target.emtpy();
+            $target.empty();
+
+            delete this.target;
         },
 
-        setState: function (state) {
-            this.state || (this.state = {});
-            if(!_.isEmpty(state)) {
-                for (var i in state) {
-                    this.state[i] = state[i];
+        update: function (model) {
+            this.model || (this.model = {});
+            if(!_.isEmpty(model)) {
+                for (var i in model) {
+                    this.model[i] = model[i];
                 }
             }
             render.apply(this);
         }
     };
 
-    // settings.target : DOMString - selector
-    // settings.template -- Mustache.parse(template);
-    // settings.events
-    return function (settings) {
+    // factory function
+    function create(settings) {
 
-        function Component(state, properties) {
-            this.state = state || {};
+        function Component(model, properties) {
+            this.model = model || {};
             this.properties = properties || {};
         }
 
@@ -102,4 +94,46 @@ var component = (function(Mustache, $, _){
 
         return Component;
     }
-})(Mustache, $, _);
+
+
+    // builder
+    function ComponentBuilder(){
+        this.events = {};
+    }
+
+    ComponentBuilder.prototype.on = function(type, selector, handler){
+        if(!this.events.hasOwnProperty(type)){
+            this.events[type] = [];
+        }
+
+        if(_.isFunction(selector)){
+            handler = selector;
+            selector = '*';
+        }
+
+        this.events[type].push({
+            selector: selector,
+            handler: handler
+        });
+
+        return this;
+    }
+
+    ComponentBuilder.prototype.render = function(render){
+        this.render = render;
+        return this;
+    }
+
+    ComponentBuilder.prototype.build = function(){
+        return create({
+            events: this.events,
+            render: this.render
+        });
+    }
+
+    return {
+        builder : function(){
+            return new ComponentBuilder();
+        }
+    }
+})($,_);

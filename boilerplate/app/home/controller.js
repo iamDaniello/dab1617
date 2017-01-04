@@ -1,13 +1,6 @@
-// knows: store and page
-
-// load data
-// init root view
 
 controller('home', {
     load: function(){
-
-    },
-    unload : function(){
         // load data
         // attach
 
@@ -19,6 +12,10 @@ controller('home', {
 
         //unload - how?
         //  unbind data store events
+
+    },
+    unload : function(){
+
     }
 })
 
