@@ -2,12 +2,11 @@
 
 // gather all mustache partials / all nested component behaviors
 
-var home = (function(){
+var Home = component({
 
+    events : [],
 
-    return {
-        //setState
-        //bind
-        //unbind
-    }
-})();
+    template : 'home'
+
+    // event handlers here
+});

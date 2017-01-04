@@ -1,3 +1,7 @@
 console.log('"main" loaded...');
 
-// init page
+
+page('/', controller('home'));
+page('/appointment/:appointment', controller('appointment'));
+
+page();
