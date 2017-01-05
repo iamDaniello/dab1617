@@ -7,12 +7,16 @@ var Component = (function($,_){
 
     // private functions
     function render() {
-        if(_.isFunction(this.render)){
-            var rendered = this.render(this.model);
-            $(this.target).html(rendered);
-        } else {
-            $(this.target).empty();
+        if(_.isFunction(this.render)) {
+            var rendered = this.render(this.model, this.target);
+            if (rendered) {
+                $(this.target).html(rendered);
+            }
+            return
         }
+
+            $(this.target).empty();
+
     }
 
     function handle(e){

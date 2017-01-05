@@ -13,6 +13,21 @@ controller('home', {
         //unload - how?
         //  unbind data store events
 
+        var model = {
+            events: [{
+                title: 'hello',
+                description: 'world'
+            },{
+                title: 'foo',
+                description: 'bar'
+            }]
+        };
+
+
+        console.log('loaded home controller');
+
+
+
     },
     unload : function(){
 

@@ -4,6 +4,7 @@ var gulp        = require('gulp'),
     uglify      = require('gulp-uglify'),
     sass        = require('gulp-sass'),
     bowerFiles  = require('main-bower-files'),
+    serve       = require('gulp-serve'),
 
     path        = require('path');
 
@@ -56,3 +57,13 @@ gulp.task('app.copy', function() {
     return gulp.src('./app/**/*.js')
         .pipe(gulp.dest('./build/js/app'));
 });
+
+gulp.task('serve', serve('build'));
+
+gulp.task('watch', function() {
+    gulp.watch(['app/**/*'], ['build']);
+});
+
+gulp.task('build', ['scss', 'libraries', 'index']);
+
+gulp.task('debug', ['build', 'serve', 'watch']);
