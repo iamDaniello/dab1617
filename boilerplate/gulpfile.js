@@ -8,7 +8,7 @@ var gulp        = require('gulp'),
 
     path        = require('path');
 
-gulp.task('default', ['scss', 'libraries', 'index']);
+gulp.task('default', ['build']);
 
 gulp.task('index', ['assets.copy', 'app.copy'], function() {
     return gulp.src('./index.html')

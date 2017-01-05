@@ -36,15 +36,14 @@ var Component = (function($,_){
     // common behavior of components
     var common = {
 
-        attach : function (target) {
+        bind : function (target) {
 
-            if(this.target) return; // must be a mistake
+            if(this.target || !target) return; // must be a mistake
 
-            this.target = target;
+            var $target = $(target);
 
-            if(this.events && this.target){
-                var $target = $(this.target),
-                    eventHandler = _.bind(handle, this);
+            if(this.events){
+                var eventHandler = _.bind(handle, this);
 
                 for(var type in this.events){
                     $target.on(type, eventHandler);
@@ -53,15 +52,30 @@ var Component = (function($,_){
                 this._eventHandler = eventHandler;
             }
 
+            this.target = target;
+
+            // raise custom bind event
+            $target.trigger('bind',
+                new Event('bind', {
+                    'bubbles': false,
+                    'cancelable': false
+                }));
+
             render.apply(this);
         },
 
-        detach: function () {
+        unbind: function () {
             var $target = $(this.target);
 
+            // raise custom unbind event
+            $target.trigger('unbind',
+                new Event('bind', {
+                    'bubbles': false,
+                    'cancelable': false
+                }));
+
             if(this.target && this._eventHandler){
-                var $target = $(this.target),
-                    eventHandler = this._eventHandler;
+                var eventHandler = this._eventHandler;
 
                 for(var type in this.events){
                     $target.off(type, eventHandler);

@@ -1,36 +1,33 @@
 
 controller('home', {
     load: function(){
-        // load data
-        // attach
-
-        //life cycle
-
-        //load
-        //  bind data store events
-        //  bring view in place
-
-        //unload - how?
-        //  unbind data store events
+        console.log('search controller ...');
 
         var model = {
-            events: [{
-                title: 'hello',
-                description: 'world'
-            },{
+            events : [{
                 title: 'foo',
                 description: 'bar'
+            },{
+                title: 'hello',
+                description: 'world'
             }]
-        };
+        }
 
+        var home = new Home(model);
 
-        console.log('loaded home controller');
+        home.bind('main');
 
-
-
+        this._home = home;
     },
-    unload : function(){
 
+    unload : function(){
+        var home = this._home;
+
+        if(home){
+            home.unbind();
+        }
+
+        delete this._home;
     }
 })
 

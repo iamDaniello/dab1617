@@ -23,7 +23,7 @@ var controller = (function(_){
                 current = controllers[name];
 
                 if(_.isObject(current) && _.isFunction(current.load)){
-                    current.load.apply(this, arguments);
+                    current.load.apply(current, arguments);
                 }
             }
 
