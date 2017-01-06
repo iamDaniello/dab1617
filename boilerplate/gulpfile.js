@@ -61,7 +61,7 @@ gulp.task('app.copy', function() {
 gulp.task('serve', serve('build'));
 
 gulp.task('watch', function() {
-    gulp.watch(['app/**/*'], ['build']);
+    gulp.watch(['app/**/*', 'assets/**/*', 'main.scss', 'index.html'], ['build']);
 });
 
 gulp.task('build', ['scss', 'libraries', 'index']);

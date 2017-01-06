@@ -7,4 +7,7 @@ var Search = Component
     .on('click', 'a.home', function(e){
         page('/');
     })
+    .on('unbind', function(e){
+        console.log('component detached from dom');
+    })
     .build();

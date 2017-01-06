@@ -33,6 +33,21 @@ var Component = (function($,_){
         }
     }
 
+    function trigger(type, target){
+
+        var $target = $(target);
+
+        $target.each(function(element){
+            $(element).trigger(type,
+            new Event(type, {
+                'bubbles': true,
+                'cancelable': false,
+                'component' : this,
+                'target' : element
+            }))
+        });
+    }
+
     // common behavior of components
     var common = {
 
@@ -55,24 +70,16 @@ var Component = (function($,_){
             this.target = target;
 
             // raise custom bind event
-            $target.trigger('bind',
-                new Event('bind', {
-                    'bubbles': false,
-                    'cancelable': false
-                }));
+            trigger.call(this, 'bind', target);
 
             render.apply(this);
         },
 
         unbind: function () {
-            var $target = $(this.target);
-
             // raise custom unbind event
-            $target.trigger('unbind',
-                new Event('bind', {
-                    'bubbles': false,
-                    'cancelable': false
-                }));
+            trigger.call(this, 'unbind', this.target);
+
+            var $target = $(this.target);
 
             if(this.target && this._eventHandler){
                 var eventHandler = this._eventHandler;

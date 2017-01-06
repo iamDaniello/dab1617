@@ -4,4 +4,8 @@ page('/', controller('home'));
 
 page('/search', controller('search'));
 
-page();
+// start
+page({
+    click: false,
+    hashbang: true
+});
