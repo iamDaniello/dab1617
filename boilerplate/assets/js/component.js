@@ -8,15 +8,14 @@ var Component = (function($,_){
     // private functions
     function render() {
         if(_.isFunction(this.render)) {
-            var rendered = this.render(this.model, this.target);
+            var rendered = this.render(this.model || {}, this.target);
             if (rendered) {
                 $(this.target).html(rendered);
             }
             return
         }
 
-            $(this.target).empty();
-
+        $(this.target).empty();
     }
 
     function handle(e){
@@ -119,7 +118,6 @@ var Component = (function($,_){
 
         return Component;
     }
-
 
     // builder
     function ComponentBuilder(){
