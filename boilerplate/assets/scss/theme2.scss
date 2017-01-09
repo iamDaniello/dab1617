@@ -1,0 +1,131 @@
+// Styleguidedatei für die UKB Krankenhaus App
+// Geschrieben in Sass -> http://sass-lang.com/
+// 09.01.2017
+
+//
+//
+//
+// CSS RESET
+//
+//
+//
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+//
+//
+//
+// BASICS
+//
+//
+//
+
+
+.clearfix::before,
+.clearfix::after {
+  content: " ";
+  display: table;
+}
+
+.clearfix::after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1; /* Für den IE6 und IE7 */
+}
+
+
+$font_regular: 400;
+$font_medium:  600;
+
+body {
+  font-family: 'helvetica neue', sans-serif;
+  text-align: center;
+}
+
+// Fonts
+
+h1 {
+  font-size: 1.625rem;
+  font-weight: $font_medium;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: $font_regular;
+}
+
+p {
+  font-size: 1.125rem;
+  font-weight: $font_regular;
+}
+
+.btn_font {
+  font-size: 1.375rem;
+  font-weight: $font_regular;
+}
+
+// Colors
+
+.black {
+  color: #000000;
+}
+
+.darkgrey {
+  color: #555555;
+}
+
+.lightgrey {
+  color: #BBBBBB;
+}
+
+// Backgroundcolors
+
+.bg_blue {
+  background-color: #0095DB;
+  color: white;
+}
+.bg_red {
+  background-color: #D40F14;
+  color: white;
+}
+
+// Use: <span class="btn Blue">CTA</span>
+
+.btn {
+  color: white;
+
+  width: 90%;
+  text-align: center;
+  border-radius: 100px;
+  box-sizing: border-box;
+  margin: 0 auto;
+
+  // Same as .btn_font
+
+  padding: 0.5rem 0;
+  font-size: 1.375rem;
+  font-weight: $font_regular;
+}
+
+// Button Backgroundcolors
+
+.blue {
+  background-color: #008C8E;
+}
+
+.green {
+  background-color: #51AE31;
+}
+
+//
+//
+//
+// WIEDERKEHRENDE ELEMENTE
+//
+//
+//
